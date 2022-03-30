@@ -2,6 +2,7 @@ package com.cydeo.eu7UIBootcamp;
 
 import com.cydeo.utilities.ConfigurationReader;
 import com.cydeo.utilities.WebDriverFactory;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -55,6 +56,8 @@ public class BasicNavigationWithTestNG {
         String actualUrl = driver.getCurrentUrl();
 
         Assert.assertEquals(actualUrl,expectedUrl,"URL is not as expected");
+
+
 
     }
 }

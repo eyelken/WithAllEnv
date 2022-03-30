@@ -1,11 +1,9 @@
 package com.cydeo.eu7UIBootcamp;
 
+import com.cydeo.pages.LoginPage;
 import com.cydeo.utilities.ConfigurationReader;
 import com.cydeo.utilities.WebDriverFactory;
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -19,6 +17,7 @@ public class BasicNavigationWithTestNG {
 
     WebDriver driver;
     WebDriverWait wait;
+    LoginPage loginPage = new LoginPage();
     @BeforeMethod
     public void setUp(){
         driver = WebDriverFactory.getDriver(ConfigurationReader.get("browser"));
@@ -60,4 +59,6 @@ public class BasicNavigationWithTestNG {
 
 
     }
+
+
 }

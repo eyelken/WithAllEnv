@@ -1,11 +1,13 @@
 package com.cydeo.step_definitions;
 
 import com.cydeo.pages.SpartanMainPage;
+import com.cydeo.pages.SpartanViewPage;
 import com.cydeo.utilities.ConfigurationReader;
 import com.cydeo.utilities.Driver;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.Assert;
 
 public class SpartansUISteps {
     @Given("Commander is at the main page")
@@ -18,7 +20,8 @@ public class SpartansUISteps {
     }
     @Then("Verifies the name of the spartan is {string}")
     public void verifies_the_name_of_the_spartan_is(String expectedName) {
-
+        String actualName = new SpartanViewPage().name.getAttribute("value");
+        Assert.assertEquals("Name is NOT same",expectedName,actualName);
     }
 
 }

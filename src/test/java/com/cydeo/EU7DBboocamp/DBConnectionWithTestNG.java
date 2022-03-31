@@ -13,7 +13,7 @@ public class DBConnectionWithTestNG {
     Connection connection;
     Statement statement;
     ResultSet resultSet;
-    String query="select name,gender from spartans where name='Oscar'";
+    String query="select name, gender from spartans where name='Oscar'";
 
     @BeforeMethod
     public void connectToDB() throws SQLException {
@@ -44,9 +44,11 @@ public class DBConnectionWithTestNG {
         int columnCount = rsmd.getColumnCount();
 
         while (resultSet.next()){
-            for (int i = 1; i < columnCount ; i++) {
-                
+            String result="";
+            for (int i = 1; i <= columnCount ; i++) {
+                result+=" "+resultSet.getString(i);
             }
+            System.out.println("result = " + result);
         }
 
     }

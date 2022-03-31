@@ -6,6 +6,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.sql.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class DBConnectionWithTestNG {
 
@@ -13,7 +15,7 @@ public class DBConnectionWithTestNG {
     Connection connection;
     Statement statement;
     ResultSet resultSet;
-    String query="select name, gender from spartans where name='Oscar'";
+    String query="select * from spartans";
 
     @BeforeMethod
     public void connectToDB() throws SQLException {
@@ -42,13 +44,17 @@ public class DBConnectionWithTestNG {
         ResultSetMetaData rsmd = resultSet.getMetaData(); // this object gives us column info
 
         int columnCount = rsmd.getColumnCount();
-
+        Map<String,Object> row = new HashMap<>();
         while (resultSet.next()){
             String result="";
             for (int i = 1; i <= columnCount ; i++) {
+
+                row.put(rsmd.getColumnName(i),resultSet.getObject(i));
+
                 result+=" "+resultSet.getString(i);
             }
             System.out.println("result = " + result);
+            System.out.println("row = " + row);
         }
 
     }

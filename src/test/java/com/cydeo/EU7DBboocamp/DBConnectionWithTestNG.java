@@ -13,7 +13,7 @@ public class DBConnectionWithTestNG {
     Connection connection;
     Statement statement;
     ResultSet resultSet;
-    String query="select name from spartans";
+    String query="select name,gender from spartans where name='Oscar'";
 
     @BeforeMethod
     public void connectToDB() throws SQLException {
@@ -31,7 +31,23 @@ public class DBConnectionWithTestNG {
 
 
     @Test
-    public void Test1(){
+    public void Test1() throws SQLException {
+        while (resultSet.next()){
+            System.out.println(resultSet.getString(1)+" "+resultSet.getString(2));
+        }
+    }
+
+    @Test
+    public void Test2() throws SQLException {
+        ResultSetMetaData rsmd = resultSet.getMetaData(); // this object gives us column info
+
+        int columnCount = rsmd.getColumnCount();
+
+        while (resultSet.next()){
+            for (int i = 1; i < columnCount ; i++) {
+                
+            }
+        }
 
     }
 

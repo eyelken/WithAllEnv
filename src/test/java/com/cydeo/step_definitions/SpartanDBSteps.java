@@ -19,7 +19,7 @@ public class SpartanDBSteps {
    }
     @Then("Spartan name should be {string}")
     public void spartan_name_should_be(String expectedName) {
-        String actualName = (String) rowMap.get("name");
+        String actualName = (String) rowMap.get("NAME");
        Assert.assertEquals(expectedName,actualName);
     }
 }

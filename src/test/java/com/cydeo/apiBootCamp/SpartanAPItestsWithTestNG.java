@@ -4,8 +4,10 @@ import com.cydeo.utilities.ConfigurationReader;
 
 import static io.restassured.RestAssured.*;
 
+import com.github.fge.jsonschema.main.JsonSchema;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
+import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 
@@ -107,4 +109,23 @@ public class SpartanAPItestsWithTestNG {
 
 
     }
+
+    @Test
+    public void Test5(){
+
+        given().accept(ContentType.JSON)
+                .and()
+                .pathParam("id",8)
+                .when()
+                .get(spartanUrl+"/api/spartans/{id}")
+                .then()
+                .statusCode(200)
+                .and()
+                .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("SingleSpartanSchema.json"));
+
+
+    }
+
+
+
 }

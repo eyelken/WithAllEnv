@@ -8,6 +8,8 @@ import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import static org.testng.Assert.*;
+
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.List;
@@ -58,6 +60,28 @@ public class SpartanAPItestsWithTestNG {
          */
 
         Response response = given().accept(ContentType.JSON)
+                .get(hrUrl+"/regions");
+
+        response.prettyPrint();
+
+        JsonPath jsonPath = response.jsonPath();
+
+        String expectedRegionName = "Cybertek Germany";
+        String actualRegionName =  jsonPath.getString("items.findAll{it.region_id==10}[0].region_name");
+
+
+        // when we use GPATH syntax with it operator, it is returning a List
+        System.out.println("actualRegionName = " + actualRegionName);
+        Assert.assertTrue(actualRegionName.contains(expectedRegionName));
+        Assert.assertEquals(actualRegionName,expectedRegionName);
+
+        // get all region ids when we have region name equals to "Cybertek Germany"
+
+        List<Integer> idList = jsonPath.getList("items.findAll{it.region_name=='Cybertek Germany'}.region_id");
+        System.out.println(idList); //  [1000, 10]
+
+        String idListString = jsonPath.getString("items.findAll{it.region_name=='Cybertek Germany'}.region_id");
+        System.out.println(idListString); // [1000, 10]
 
     }
 }

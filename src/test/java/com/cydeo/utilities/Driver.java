@@ -1,6 +1,7 @@
 package com.cydeo.utilities;
 
 
+import io.appium.java_client.remote.MobileCapabilityType;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
@@ -76,6 +77,21 @@ public class Driver {
                     } catch (MalformedURLException e) {
                         e.printStackTrace();
                     }
+              case "mobile_chrome":
+                DesiredCapabilities desiredCapabilities= new DesiredCapabilities();
+
+                desiredCapabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, Platform.ANDROID);
+                desiredCapabilities.setCapability(MobileCapabilityType.VERSION, "8.0");
+                desiredCapabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Pixel_2");
+                //we are telling we want to open the chrome browser
+                desiredCapabilities.setCapability(MobileCapabilityType.BROWSER_NAME, BrowserType.CHROME);
+                desiredCapabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "UiAutomator2");
+
+                try{
+                  driverPool.set(new RemoteWebDriver(new URL("http://localhost:4723/wd/hub"), desiredCapabilities));
+                }catch (MalformedURLException e){
+                  e.printStackTrace();
+                }
 
             }
         }
